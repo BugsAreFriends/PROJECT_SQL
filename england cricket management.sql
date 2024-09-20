@@ -326,3 +326,8 @@ left join coach_career on coaches.career_id = coach_career.career_id;
 
 
 
+
+/*right join the coach and coach career*/
+
+select distinct * from coaches
+right join coach_career on coaches.career_id = coach_career.career_id;
