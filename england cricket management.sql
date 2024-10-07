@@ -331,3 +331,20 @@ left join coach_career on coaches.career_id = coach_career.career_id;
 
 select distinct * from coaches
 right join coach_career on coaches.career_id = coach_career.career_id;
+
+
+
+
+delimiter $$
+create procedure T20_Player(in country varchar(255))
+
+begin
+
+
+select player_name,roles,batting_style,bowling_style,t20i_deput_against,speciality from player_career
+inner join england_men_team on player_career.career_id=england_men_team.career_id
+where t20i_deput_against = (select distinct t20i_deput_against from player_career where t20i_deput_against like country);
+
+end $$
+
+delimiter ;
