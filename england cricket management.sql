@@ -348,3 +348,39 @@ where t20i_deput_against = (select distinct t20i_deput_against from player_caree
 end $$
 
 delimiter ;
+
+
+/* stored procedure for list out the choose  batting style   in mens team */
+
+delimiter $$
+create procedure batting_style(in style varchar(20))
+begin
+
+select player_name,batting_style,roles from england_men_team
+inner join player_career on england_men_team.career_id=player_career.career_id
+where batting_style like style;
+
+end $$
+
+
+delimiter ;
+
+call batting_style ("right%");
+
+
+/*retreiving data of women player who bowling in right and batted in left above calling salary */
+
+delimiter $$
+
+create procedure right_bat_and_left_bowl_women(in salary_called int)
+begin
+
+select player_name,salary,roles,batting_style,bowling_style from england_women_team
+inner join women_career on england_women_team.career_id=women_career.career_id
+where batting_style like "right%" and bowling_style like "left%" and 
+salary > (select distinct min(salary) from england_women_team where salary>salary_called ) ; 
+end $$
+
+ delimiter ;
+ 
+ call right_bat_and_left_bowl_women(1000000);
