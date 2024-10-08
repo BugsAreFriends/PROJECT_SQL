@@ -384,3 +384,4 @@ end $$
  delimiter ;
  
  call right_bat_and_left_bowl_women(1000000);
+
