@@ -378,10 +378,13 @@ begin
 select player_name,salary,roles,batting_style,bowling_style from england_women_team
 inner join women_career on england_women_team.career_id=women_career.career_id
 where batting_style like "right%" and bowling_style like "left%" and 
-salary > (select distinct min(salary) from england_women_team where salary>salary_called ) ; 
+salary > salary_called;
 end $$
 
  delimiter ;
  
  call right_bat_and_left_bowl_women(1000000);
 
+
+
+use ecb_management;
